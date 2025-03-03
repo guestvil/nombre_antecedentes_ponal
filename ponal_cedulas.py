@@ -49,12 +49,8 @@ def get_name_ponal(users_info: dict):
                 ponal_page.goto('https://antecedentes.policia.gov.co:7005/WebJudicial/')
                 continue
             # ponal_page.wait_for_timeout(5000)
-            if user_info['id_type'] != 'CC' and user_info['id_type'] != 'PEP':
-                if user_info['id_type'] == 'PPT':
-                    id_type = 'pa'
-                if user_info['id_type'] == 'CE': 
-                    id_type = 'cs'
-                ponal_page.locator('select#cedulaTipo').select_option(id_type)
+            if user_info['id_type'] != 'CC':
+                continue
             ponal_page.get_by_role('textbox').fill(user_info['id'])
             ponal_page.get_by_role('button', name='Consultar').click()
             ponal_html = ponal_page.locator('span#form\\:mensajeCiudadano').inner_html()
